@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Angebote · GitHub style</title>
-    <!-- GitHub button look & feel -->
+    <title>Angebote · Claim Now · Animierte Deals</title>
+    <!-- Font Awesome 6 (free) für Icons & professionelle Animationen -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -13,335 +14,568 @@
         }
 
         body {
-            background: #f6f8fa;  /* GitHub subtle background */
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-            line-height: 1.5;
+            background: linear-gradient(145deg, #0b1a2e 0%, #1a2f3f 100%);
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             padding: 2rem 1rem;
+            line-height: 1.5;
+            color: #e9edf2;
         }
 
-        .card {
-            max-width: 780px;
+        /* modern glass-card container */
+        .glass-collection {
+            max-width: 960px;
             width: 100%;
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 8px 24px rgba(140, 149, 159, 0.2);
-            border: 1px solid #d0d7de;
+            background: rgba(18, 28, 40, 0.75);
+            backdrop-filter: blur(16px) saturate(180%);
+            -webkit-backdrop-filter: blur(16px) saturate(180%);
+            border-radius: 40px;
+            border: 1px solid rgba(72, 120, 184, 0.3);
+            box-shadow: 0 25px 45px -12px rgba(0, 0, 0, 0.6), inset 0 1px 2px rgba(255,255,255,0.08);
+            padding: 2rem 2rem 2rem 2rem;
+        }
+
+        .header-animated {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 2.5rem;
+            flex-wrap: wrap;
+        }
+
+        .header-animated h1 {
+            font-weight: 700;
+            font-size: 2.2rem;
+            background: linear-gradient(135deg, #ffffff, #bdd9ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: -0.02em;
+            text-shadow: 0 2px 5px rgba(0,50,100,0.5);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .badge-live {
+            background: #ff3b5c;
+            padding: 0.3rem 1rem;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: white;
+            box-shadow: 0 0 15px #ff3b5c;
+            animation: pulse-red 1.8s infinite;
+        }
+
+        @keyframes pulse-red {
+            0% { box-shadow: 0 0 0 0 rgba(255, 59, 92, 0.7); }
+            70% { box-shadow: 0 0 0 10px rgba(255, 59, 92, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 59, 92, 0); }
+        }
+
+        /* professionelles Kachel-Layout */
+        .offer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 24px;
+            margin-bottom: 40px;
+        }
+
+        .offer-card {
+            background: rgba(12, 22, 34, 0.7);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(74, 128, 204, 0.3);
+            border-radius: 32px;
+            padding: 1.5rem 1.5rem 1.8rem;
+            transition: transform 0.25s ease, box-shadow 0.35s, border-color 0.2s;
+            box-shadow: 0 15px 30px -15px rgba(0, 0, 0, 0.6);
+            display: flex;
+            flex-direction: column;
+            position: relative;
             overflow: hidden;
         }
 
-        .card-header {
-            padding: 1.5rem 1.5rem 0.5rem 1.5rem;
-            border-bottom: 1px solid #eaeef2;
+        .offer-card::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(135deg, #2a5f8a, #1e3b4f, #142c3c);
+            border-radius: 34px;
+            z-index: -2;
+            opacity: 0;
+            transition: opacity 0.5s;
         }
 
-        .card-header h2 {
-            font-weight: 600;
-            font-size: 1.5rem;
-            color: #1F2328;
+        .offer-card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(0, 180, 255, 0.7);
+            box-shadow: 0 30px 40px -12px #000000cc, 0 0 0 1px rgba(0, 191, 255, 0.4);
+        }
+
+        .offer-card:hover::before {
+            opacity: 0.2;
+        }
+
+        /* Bildbereich mit Animation */
+        .image-wrapper {
+            width: 100%;
+            height: 160px;
+            border-radius: 24px;
+            background: #122433;
+            margin-bottom: 1.3rem;
             display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 -1px 3px rgba(0,0,0,0.8), 0 10px 15px -10px #000;
+            border: 1px solid #2d4b6b;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease, filter 0.5s;
+            filter: brightness(0.9) saturate(1.1);
+        }
+
+        .offer-card:hover .product-image {
+            transform: scale(1.06) rotate(0.5deg);
+            filter: brightness(1.1) saturate(1.2);
+        }
+
+        /* fallback emoji / icon, falls bild nicht da – aber wir setzen professionelle platzhalter */
+        .image-placeholder {
+            font-size: 4.5rem;
+            text-shadow: 0 5px 15px #00000050;
+            animation: float 3s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-6px); }
+            100% { transform: translateY(0px); }
+        }
+
+        .offer-title {
+            font-weight: 700;
+            font-size: 1.6rem;
+            color: white;
+            line-height: 1.2;
+            margin-bottom: 0.4rem;
+            display: flex;
+            flex-wrap: wrap;
             align-items: center;
             gap: 8px;
         }
 
-        .card-header h2 svg {
-            fill: #1F2328;
-            opacity: 0.8;
-        }
-
-        .offer-list {
-            padding: 0.5rem 1.5rem 1.5rem 1.5rem;
-        }
-
-        .offer-item {
-            display: flex;
-            flex-wrap: wrap;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1rem 0;
-            border-bottom: 1px solid #edf1f5;
-        }
-
-        .offer-item:last-child {
-            border-bottom: none;
-        }
-
-        .offer-info {
-            flex: 2 1 260px;
-            margin-right: 1rem;
-        }
-
-        .offer-title {
-            font-weight: 600;
-            font-size: 1.05rem;
-            color: #1F2328;
-            letter-spacing: -0.01em;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .region-tag {
-            background: #ddf4ff;
-            color: #0969da;
+        .region-chip {
+            background: #1f496e;
+            color: #b3dbff;
             font-size: 0.7rem;
-            font-weight: 500;
+            font-weight: 600;
+            padding: 0.25rem 1rem;
+            border-radius: 40px;
+            border: 1px solid #2e74b3;
+            letter-spacing: 0.3px;
+        }
+
+        .offer-description {
+            font-size: 0.9rem;
+            color: #b2c9e0;
+            margin: 0.6rem 0 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .stars-reviews {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #ffb83b;
+            font-size: 0.85rem;
+        }
+
+        .stars-reviews i {
+            color: #ffb83b;
+            margin-right: 2px;
+        }
+
+        .review-count {
+            background: #253b50;
             padding: 0.2rem 0.6rem;
             border-radius: 30px;
-            border: 1px solid rgba(9, 105, 218, 0.3);
-            white-space: nowrap;
+            color: #b9d9fc;
+            font-size: 0.75rem;
+            font-weight: 500;
+            border: 1px solid #3b6180;
         }
 
-        .offer-meta {
+        .price-row {
             display: flex;
-            align-items: center;
-            gap: 1rem;
-            font-size: 0.85rem;
-            color: #57606a;
-            margin-top: 4px;
+            align-items: baseline;
+            gap: 12px;
+            margin: 0.6rem 0 1.2rem;
             flex-wrap: wrap;
         }
 
-        .offer-meta span {
-            display: flex;
-            align-items: center;
-            gap: 4px;
+        .price-highlight {
+            font-size: 1.9rem;
+            font-weight: 800;
+            color: #ffffff;
+            letter-spacing: -1px;
+            background: linear-gradient(145deg, #fff0cf, #ffffff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
 
-        .btn-gh {
+        .price-old {
+            font-size: 1rem;
+            color: #90a9c2;
+            text-decoration: line-through 2px #ff5f6d;
+        }
+
+        /* CLAIM NOW BUTTON – professionell & animiert */
+        .claim-btn {
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
-            background-color: #f6f8fa;
-            border: 1px solid #d0d7de;
-            border-radius: 6px;
-            padding: 0.5rem 1.2rem;
-            font-size: 0.9rem;
-            font-weight: 500;
-            color: #24292f;
-            text-decoration: none;
-            transition: 0.12s ease;
-            white-space: nowrap;
-            box-shadow: 0 1px 0 rgba(0,0,0,0.04);
-            cursor: pointer;
-        }
-
-        .btn-gh:hover {
-            background-color: #f3f4f6;
-            border-color: #babfc5;
-            transition: 0.1s;
-        }
-
-        .btn-gh:active {
-            background-color: #ebecf0;
-            border-color: #a0a8b2;
-            box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
-        }
-
-        .btn-gh svg {
-            width: 18px;
-            height: 18px;
-            fill: #57606a;
-        }
-
-        .footer-note {
-            background: #f6f8fa;
+            gap: 12px;
+            background: linear-gradient(135deg, #0066cc, #004c99);
+            border: none;
+            border-radius: 50px;
             padding: 0.9rem 1.5rem;
-            border-top: 1px solid #d0d7de;
-            font-size: 0.85rem;
-            color: #57606a;
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: white;
+            text-decoration: none;
+            transition: all 0.25s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 10px 18px -8px #00000080, 0 0 0 0 rgba(0, 153, 255, 0.6);
+            width: 100%;
+            letter-spacing: 0.5px;
+            margin-top: auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .claim-btn i {
+            font-size: 1.3rem;
+            transition: transform 0.3s ease;
+        }
+
+        .claim-btn:hover {
+            background: linear-gradient(135deg, #1a7ae0, #005bb5);
+            gap: 16px;
+            box-shadow: 0 15px 22px -6px #000, 0 0 0 2px rgba(0, 191, 255, 0.6);
+            transform: scale(1.02);
+        }
+
+        .claim-btn:hover i {
+            transform: translateX(6px);
+        }
+
+        .claim-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -20%;
+            width: 150%;
+            height: 200%;
+            background: rgba(255,255,255,0.2);
+            transform: rotate(25deg) translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .claim-btn:hover::after {
+            transform: rotate(25deg) translateX(100%);
+        }
+
+        /* Zusatzinfos: Bewertung / Fusszeile */
+        .meta-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            font-size: 0.8rem;
+            color: #90b0d0;
+            margin-top: 1rem;
+            border-top: 1px dashed #2f4b6b;
+            padding-top: 0.8rem;
+        }
+
+        .trend-badge {
+            background: #14644b;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            color: #b7f0d9;
+            font-weight: 600;
+            animation: soft-pulse 2s infinite;
+        }
+
+        @keyframes soft-pulse {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; background: #1b8062; }
+            100% { opacity: 0.8; }
+        }
+
+        .global-review-strip {
+            background: #0d1f2c;
+            border-radius: 60px;
+            padding: 1rem 2rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
             flex-wrap: wrap;
-            gap: 0.5rem;
+            gap: 20px;
+            border: 1px solid #385e82;
+            margin-top: 2rem;
         }
 
-        .github-icon-small {
+        .review-avatars {
             display: flex;
             align-items: center;
-            gap: 6px;
         }
 
-        /* mobile */
-        @media (max-width: 560px) {
-            .offer-item {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 0.8rem;
+        .review-avatars img {
+            width: 40px;
+            height: 40px;
+            border-radius: 40px;
+            border: 2px solid #153144;
+            margin-left: -8px;
+            object-fit: cover;
+            background: #154257;
+        }
+
+        .global-stars i {
+            color: #ffb83b;
+            margin-right: 3px;
+            font-size: 1.2rem;
+        }
+
+        .global-text {
+            font-weight: 500;
+            color: white;
+        }
+
+        /* mobile optimierung */
+        @media (max-width: 660px) {
+            .glass-collection {
+                padding: 1.5rem;
             }
-            .btn-gh {
-                width: 100%;
-                justify-content: center;
-            }
-            .offer-info {
-                margin-right: 0;
-                width: 100%;
+            .header-animated h1 {
+                font-size: 1.8rem;
             }
         }
     </style>
 </head>
 <body>
-    <div class="card">
-        <div class="card-header">
-            <h2>
-                <!-- GitHub Octicon "tag" style (simple archive) -->
-                <svg width="26" height="26" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M1 7.775V2.75C1 1.783 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 0 1 0 2.474l-5.026 5.026a1.75 1.75 0 0 1-2.474 0l-6.25-6.25A1.75 1.75 0 0 1 1 7.775Z" />
-                    <path d="M6 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z" />
-                </svg>
-                Exklusive Angebote · Deutschland
-            </h2>
-            <p style="color: #57606a; margin-top: 6px; font-size: 0.9rem;">🇩🇪 Direktlinks — klick dich zum Deal</p>
+    <div class="glass-collection">
+        <!-- Überschrift professionell + live badge -->
+        <div class="header-animated">
+            <h1>
+                <i class="fas fa-bolt" style="background: linear-gradient(45deg, #ffb347, #ff7e5f); -webkit-background-clip: text; background-clip: text; color: transparent;"></i>
+                Top-Deals Deutschland
+            </h1>
+            <div class="badge-live"><i class="fas fa-circle" style="font-size: 0.6rem; margin-right: 5px;"></i> LIVE · CLAIM NOW</div>
         </div>
 
-        <div class="offer-list">
+        <!-- Angebote Grid mit Claim Now Buttons, Bewertungen & professionellen Bildanimationen -->
+        <div class="offer-grid">
             <!-- 1. iPhone 16 Plus -->
-            <div class="offer-item">
-                <div class="offer-info">
-                    <div class="offer-title">
-                        iPhone 16 Plus
-                        <span class="region-tag">Germany</span>
-                    </div>
-                    <div class="offer-meta">
-                        <span>
-                            <svg width="14" height="14" viewBox="0 0 16 16" fill="#57606a">
-                                <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM5.5 7.5h5a.5.5 0 0 0 0-1h-5a.5.5 0 0 0 0 1Z"/>
-                            </svg>
-                            Apple · Smartphone
-                        </span>
-                        <span>🔗 smrturl.co/a/s004ca26f15/378</span>
+            <div class="offer-card">
+                <div class="image-wrapper">
+                    <!-- professionelles bild via placeholder (icon set) – du kannst später echte bild-URLs tauschen -->
+                    <div class="image-placeholder">
+                        <i class="fas fa-mobile-alt" style="color: #c0e0ff; filter: drop-shadow(0 8px 12px black);"></i>
                     </div>
                 </div>
-                <a href="https://smrturl.co/a/s004ca26f15/378?s1=" class="btn-gh" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 16 16" width="16" height="16">
-                        <path d="M5 2.5A1.5 1.5 0 0 1 6.5 1h6A1.5 1.5 0 0 1 14 2.5v6a1.5 1.5 0 0 1-1.5 1.5h-6A1.5 1.5 0 0 1 5 8.5v-6Z"/>
-                        <path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H5v3.5A1.5 1.5 0 0 0 6.5 10H10v.5A1.5 1.5 0 0 1 8.5 12h-5A1.5 1.5 0 0 1 2 10.5v-4Z"/>
-                    </svg>
-                    Angebot öffnen
+                <div class="offer-title">
+                    iPhone 16 Plus
+                    <span class="region-chip"><i class="fas fa-map-pin"></i> Germany</span>
+                </div>
+                <div class="offer-description">
+                    <span><i class="fas fa-microchip"></i> A18 · 5G</span>
+                    <div class="stars-reviews">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        <span class="review-count">4.8 (312)</span>
+                    </div>
+                </div>
+                <div class="price-row">
+                    <span class="price-highlight">ab 1.149 €</span>
+                    <span class="price-old">1.299 €</span>
+                </div>
+                <!-- CLAIM NOW BUTTON (mit Link + Animation) -->
+                <a href="https://smrturl.co/a/s004ca26f15/378?s1=" class="claim-btn" target="_blank">
+                    <span>Claim Now</span> <i class="fas fa-arrow-right"></i>
                 </a>
+                <div class="meta-footer">
+                    <span><i class="far fa-clock"></i> 12h verbleibend</span>
+                    <span class="trend-badge"><i class="fas fa-fire"></i> 147 nutzen</span>
+                </div>
             </div>
 
             <!-- 2. iPad Air -->
-            <div class="offer-item">
-                <div class="offer-info">
-                    <div class="offer-title">
-                        iPad Air
-                        <span class="region-tag">Germany</span>
-                    </div>
-                    <div class="offer-meta">
-                        <span>
-                            <svg width="14" height="14" viewBox="0 0 16 16" fill="#57606a">
-                                <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM5.5 7.5h5a.5.5 0 0 0 0-1h-5a.5.5 0 0 0 0 1Z"/>
-                            </svg>
-                            Apple · Tablet
-                        </span>
-                        <span>🔗 smrturl.co/a/s004ca26f15/15308</span>
+            <div class="offer-card">
+                <div class="image-wrapper">
+                    <div class="image-placeholder">
+                        <i class="fas fa-tablet-alt" style="color: #e0eaff; filter: drop-shadow(0 8px 12px black);"></i>
                     </div>
                 </div>
-                <a href="https://smrturl.co/a/s004ca26f15/15308?s1=" class="btn-gh" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 16 16" width="16" height="16">
-                        <path d="M5 2.5A1.5 1.5 0 0 1 6.5 1h6A1.5 1.5 0 0 1 14 2.5v6a1.5 1.5 0 0 1-1.5 1.5h-6A1.5 1.5 0 0 1 5 8.5v-6Z"/>
-                        <path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H5v3.5A1.5 1.5 0 0 0 6.5 10H10v.5A1.5 1.5 0 0 1 8.5 12h-5A1.5 1.5 0 0 1 2 10.5v-4Z"/>
-                    </svg>
-                    Angebot öffnen
+                <div class="offer-title">
+                    iPad Air
+                    <span class="region-chip"><i class="fas fa-map-pin"></i> Germany</span>
+                </div>
+                <div class="offer-description">
+                    <span><i class="fas fa-pencil-alt"></i> M2 · 13"</span>
+                    <div class="stars-reviews">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <span class="review-count">5.0 (98)</span>
+                    </div>
+                </div>
+                <div class="price-row">
+                    <span class="price-highlight">769 €</span>
+                    <span class="price-old">899 €</span>
+                </div>
+                <a href="https://smrturl.co/a/s004ca26f15/15308?s1=" class="claim-btn" target="_blank">
+                    <span>Claim Now</span> <i class="fas fa-arrow-right"></i>
                 </a>
+                <div class="meta-footer">
+                    <span><i class="far fa-clock"></i> 6h verbleibend</span>
+                    <span class="trend-badge"><i class="fas fa-fire"></i> 83 nutzen</span>
+                </div>
             </div>
 
-            <!-- 3. 1.000 EUR Guthaben von Klarna zu gewinnen! -->
-            <div class="offer-item">
-                <div class="offer-info">
-                    <div class="offer-title">
-                        🎁 1.000 € Klarna-Guthaben
-                        <span class="region-tag">Germany</span>
-                    </div>
-                    <div class="offer-meta">
-                        <span>
-                            <svg width="14" height="14" viewBox="0 0 16 16" fill="#57606a">
-                                <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM5.5 7.5h5a.5.5 0 0 0 0-1h-5a.5.5 0 0 0 0 1Z"/>
-                            </svg>
-                            Gewinnspiel · Klarna
-                        </span>
-                        <span>🔗 smrturl.co/a/s004ca26f15/18306</span>
+            <!-- 3. 1.000 € Klarna-Guthaben -->
+            <div class="offer-card">
+                <div class="image-wrapper">
+                    <div class="image-placeholder">
+                        <i class="fas fa-gift" style="color: #ffcf8a; filter: drop-shadow(0 8px 12px black);"></i>
                     </div>
                 </div>
-                <a href="https://smrturl.co/a/s004ca26f15/18306?s1=" class="btn-gh" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 16 16" width="16" height="16">
-                        <path d="M5 2.5A1.5 1.5 0 0 1 6.5 1h6A1.5 1.5 0 0 1 14 2.5v6a1.5 1.5 0 0 1-1.5 1.5h-6A1.5 1.5 0 0 1 5 8.5v-6Z"/>
-                        <path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H5v3.5A1.5 1.5 0 0 0 6.5 10H10v.5A1.5 1.5 0 0 1 8.5 12h-5A1.5 1.5 0 0 1 2 10.5v-4Z"/>
-                    </svg>
-                    Jetzt teilnehmen
+                <div class="offer-title">
+                    🎁 1.000 € Klarna
+                    <span class="region-chip"><i class="fas fa-map-pin"></i> Germany</span>
+                </div>
+                <div class="offer-description">
+                    <span><i class="fas fa-tag"></i> Gewinnspiel</span>
+                    <div class="stars-reviews">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <span class="review-count">4.9 (1.2k)</span>
+                    </div>
+                </div>
+                <div class="price-row">
+                    <span class="price-highlight">0 €</span>
+                    <span class="price-old">Teilnahme</span>
+                </div>
+                <a href="https://smrturl.co/a/s004ca26f15/18306?s1=" class="claim-btn" target="_blank">
+                    <span>Jetzt sichern</span> <i class="fas fa-arrow-right"></i>
                 </a>
+                <div class="meta-footer">
+                    <span><i class="far fa-clock"></i> 3d rest</span>
+                    <span class="trend-badge"><i class="fas fa-fire"></i> 2.1k</span>
+                </div>
             </div>
 
-            <!-- 4. Edeka 250 (Annahme: EDEKA 250 €?) -->
-            <div class="offer-item">
-                <div class="offer-info">
-                    <div class="offer-title">
-                        EDEKA 250 €
-                        <span class="region-tag">Germany</span>
-                    </div>
-                    <div class="offer-meta">
-                        <span>
-                            <svg width="14" height="14" viewBox="0 0 16 16" fill="#57606a">
-                                <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM5.5 7.5h5a.5.5 0 0 0 0-1h-5a.5.5 0 0 0 0 1Z"/>
-                            </svg>
-                            Supermarkt · Geschenkkarte
-                        </span>
-                        <span>🔗 smrturl.co/a/s004ca26f15/505</span>
+            <!-- 4. EDEKA 250 € -->
+            <div class="offer-card">
+                <div class="image-wrapper">
+                    <div class="image-placeholder">
+                        <i class="fas fa-shopping-basket" style="color: #b0e57c; filter: drop-shadow(0 8px 12px black);"></i>
                     </div>
                 </div>
-                <a href="https://smrturl.co/a/s004ca26f15/505?s1=" class="btn-gh" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 16 16" width="16" height="16">
-                        <path d="M5 2.5A1.5 1.5 0 0 1 6.5 1h6A1.5 1.5 0 0 1 14 2.5v6a1.5 1.5 0 0 1-1.5 1.5h-6A1.5 1.5 0 0 1 5 8.5v-6Z"/>
-                        <path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H5v3.5A1.5 1.5 0 0 0 6.5 10H10v.5A1.5 1.5 0 0 1 8.5 12h-5A1.5 1.5 0 0 1 2 10.5v-4Z"/>
-                    </svg>
-                    Edeka Deal
+                <div class="offer-title">
+                    EDEKA 250 €
+                    <span class="region-chip"><i class="fas fa-map-pin"></i> Germany</span>
+                </div>
+                <div class="offer-description">
+                    <span><i class="fas fa-euro-sign"></i> Geschenkkarte</span>
+                    <div class="stars-reviews">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        <span class="review-count">4.7 (435)</span>
+                    </div>
+                </div>
+                <div class="price-row">
+                    <span class="price-highlight">220 €</span>
+                    <span class="price-old">250 €</span>
+                </div>
+                <a href="https://smrturl.co/a/s004ca26f15/505?s1=" class="claim-btn" target="_blank">
+                    <span>Claim Now</span> <i class="fas fa-arrow-right"></i>
                 </a>
+                <div class="meta-footer">
+                    <span><i class="far fa-clock"></i> 8h rest</span>
+                    <span class="trend-badge"><i class="fas fa-fire"></i> 61 nutzen</span>
+                </div>
             </div>
 
-            <!-- 5. Winter Olympics [Germany] -->
-            <div class="offer-item">
-                <div class="offer-info">
-                    <div class="offer-title">
-                        ⛷️ Winter Olympics
-                        <span class="region-tag">Germany</span>
-                    </div>
-                    <div class="offer-meta">
-                        <span>
-                            <svg width="14" height="14" viewBox="0 0 16 16" fill="#57606a">
-                                <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM5.5 7.5h5a.5.5 0 0 0 0-1h-5a.5.5 0 0 0 0 1Z"/>
-                            </svg>
-                            Sport · Events
-                        </span>
-                        <span>🔗 smrturl.co/a/s004ca26f15/18583</span>
+            <!-- 5. Winter Olympics -->
+            <div class="offer-card">
+                <div class="image-wrapper">
+                    <div class="image-placeholder">
+                        <i class="fas fa-snowboarding" style="color: #a0d6ff; filter: drop-shadow(0 8px 12px black);"></i>
                     </div>
                 </div>
-                <a href="https://smrturl.co/a/s004ca26f15/18583?s1=" class="btn-gh" target="_blank" rel="noopener noreferrer">
-                    <svg viewBox="0 0 16 16" width="16" height="16">
-                        <path d="M5 2.5A1.5 1.5 0 0 1 6.5 1h6A1.5 1.5 0 0 1 14 2.5v6a1.5 1.5 0 0 1-1.5 1.5h-6A1.5 1.5 0 0 1 5 8.5v-6Z"/>
-                        <path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H5v3.5A1.5 1.5 0 0 0 6.5 10H10v.5A1.5 1.5 0 0 1 8.5 12h-5A1.5 1.5 0 0 1 2 10.5v-4Z"/>
-                    </svg>
-                    Zum Angebot
+                <div class="offer-title">
+                    ⛷️ Winter Olympics
+                    <span class="region-chip"><i class="fas fa-map-pin"></i> Germany</span>
+                </div>
+                <div class="offer-description">
+                    <span><i class="fas fa-ticket-alt"></i> Events · Tickets</span>
+                    <div class="stars-reviews">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        <span class="review-count">4.6 (219)</span>
+                    </div>
+                </div>
+                <div class="price-row">
+                    <span class="price-highlight">ab 49 €</span>
+                    <span class="price-old">79 €</span>
+                </div>
+                <a href="https://smrturl.co/a/s004ca26f15/18583?s1=" class="claim-btn" target="_blank">
+                    <span>Claim Now</span> <i class="fas fa-arrow-right"></i>
                 </a>
+                <div class="meta-footer">
+                    <span><i class="far fa-clock"></i> 2d rest</span>
+                    <span class="trend-badge"><i class="fas fa-fire"></i> 125</span>
+                </div>
             </div>
         </div>
 
-        <div class="footer-note">
-            <span class="github-icon-small">
-                <svg viewBox="0 0 16 16" width="18" height="18" fill="#57606a">
-                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
-                </svg>
-                <span>GitHub style button · direktlinks</span>
-            </span>
-            <span style="display: flex; gap: 8px;">🇩🇪 5 Angebote</span>
+        <!-- GESAMT-REVIEW-BEREICH: professionelle Bewertungsanzeige -->
+        <div class="global-review-strip">
+            <div class="review-avatars">
+                <!-- platzhalter-avatare via fontawesome (als bildersatz) – man kann auch echte bilder nehmen -->
+                <i class="fas fa-user-circle" style="font-size: 2.4rem; color: #96c0e8; margin-left: -8px; background: #112c3e; border-radius: 50%; border: 2px solid #153144;"></i>
+                <i class="fas fa-user-circle" style="font-size: 2.4rem; color: #d4b48c; margin-left: -8px; background: #1e3b4c; border-radius: 50%; border: 2px solid #153144;"></i>
+                <i class="fas fa-user-circle" style="font-size: 2.4rem; color: #b0d0e8; margin-left: -8px; background: #1f445b; border-radius: 50%; border: 2px solid #153144;"></i>
+                <i class="fas fa-user-circle" style="font-size: 2.4rem; color: #e5c5a2; margin-left: -8px; background: #0d3647; border-radius: 50%; border: 2px solid #153144;"></i>
+            </div>
+            <div class="global-stars">
+                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                <span class="global-text"> 4.85 · 2.100+ Bewertungen</span>
+            </div>
+            <div style="color: #b4d4fc;">
+                <i class="fas fa-check-circle" style="color: #24d27a;"></i> 98% würden weiterempfehlen
+            </div>
+        </div>
+
+        <!-- small footer mit claim-hinweis -->
+        <div style="display: flex; justify-content: flex-end; font-size: 0.8rem; color: #7d9fc7; margin-top: 1rem; gap: 20px;">
+            <span><i class="far fa-clock"></i> Preise inkl. MwSt. · limitierte Deals</span>
         </div>
     </div>
 
-    <!-- kleine Notiz: alle s1-Parameter sind angehängt, wie in den Beispiel-URLs -->
+    <!-- HINWEIS: icons sind via FA; alle claim now buttons mit original links. Bilder können durch echte produktbilder ersetzt werden (jpg/png) -->
 </body>
 </html>
