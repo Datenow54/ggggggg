@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angebote · GitHub style</title>
+    <!-- GitHub button look & feel -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #f6f8fa;  /* GitHub subtle background */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 2rem 1rem;
+        }
+
+        .card {
+            max-width: 780px;
+            width: 100%;
+            background: #ffffff;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(140, 149, 159, 0.2);
+            border: 1px solid #d0d7de;
+            overflow: hidden;
+        }
+
+        .card-header {
+            padding: 1.5rem 1.5rem 0.5rem 1.5rem;
+            border-bottom: 1px solid #eaeef2;
+        }
+
+        .card-header h2 {
+            font-weight: 600;
+            font-size: 1.5rem;
+            color: #1F2328;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .card-header h2 svg {
+            fill: #1F2328;
+            opacity: 0.8;
+        }
+
+        .offer-list {
+            padding: 0.5rem 1.5rem 1.5rem 1.5rem;
+        }
+
+        .offer-item {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid #edf1f5;
+        }
+
+        .offer-item:last-child {
+            border-bottom: none;
+        }
+
+        .offer-info {
+            flex: 2 1 260px;
+            margin-right: 1rem;
+        }
+
+        .offer-title {
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: #1F2328;
+            letter-spacing: -0.01em;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .region-tag {
+            background: #ddf4ff;
+            color: #0969da;
+            font-size: 0.7rem;
+            font-weight: 500;
+            padding: 0.2rem 0.6rem;
+            border-radius: 30px;
+            border: 1px solid rgba(9, 105, 218, 0.3);
+            white-space: nowrap;
+        }
+
+        .offer-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 0.85rem;
+            color: #57606a;
+            margin-top: 4px;
+            flex-wrap: wrap;
+        }
+
+        .offer-meta span {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .btn-gh {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background-color: #f6f8fa;
+            border: 1px solid #d0d7de;
+            border-radius: 6px;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #24292f;
+            text-decoration: none;
+            transition: 0.12s ease;
+            white-space: nowrap;
+            box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+            cursor: pointer;
+        }
+
+        .btn-gh:hover {
+            background-color: #f3f4f6;
+            border-color: #babfc5;
+            transition: 0.1s;
+        }
+
+        .btn-gh:active {
+            background-color: #ebecf0;
+            border-color: #a0a8b2;
+            box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
+        }
+
+        .btn-gh svg {
+            width: 18px;
+            height: 18px;
+            fill: #57606a;
+        }
+
+        .footer-note {
+            background: #f6f8fa;
+            padding: 0.9rem 1.5rem;
+            border-top: 1px solid #d0d7de;
+            font-size: 0.85rem;
+            color: #57606a;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .github-icon-small {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* mobile */
+        @media (max-width: 560px) {
+            .offer-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.8rem;
+            }
+            .btn-gh {
+                width: 100%;
+                justify-content: center;
+            }
+            .offer-info {
+                margin-right: 0;
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="card-header">
+            <h2>
+                <!-- GitHub Octicon "tag" style (simple archive) -->
+                <svg width="26" height="26" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M1 7.775V2.75C1 1.783 1.784 1 2.75 1h5.025c.464 0 .91.184 1.238.513l6.25 6.25a1.75 1.75 0 0 1 0 2.474l-5.026 5.026a1.75 1.75 0 0 1-2.474 0l-6.25-6.25A1.75 1.75 0 0 1 1 7.775Z" />
+                    <path d="M6 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2Z" />
+                </svg>
+                Exklusive Angebote · Deutschland
+            </h2>
+            <p style="color: #57606a; margin-top: 6px; font-size: 0.9rem;">🇩🇪 Direktlinks — klick dich zum Deal</p>
+        </div>
+
+        <div class="offer-list">
+            <!-- 1. iPhone 16 Plus -->
+            <div class="offer-item">
+                <div class="offer-info">
+                    <div class="offer-title">
+                        iPhone 16 Plus
+                        <span class="region-tag">Germany</span>
+                    </div>
+                    <div class="offer-meta">
+                        <span>
+                            <svg width="14" height="14" viewBox="0 0 16 16" fill="#57606a">
+                                <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM5.5 7.5h5a.5.5 0 0 0 0-1h-5a.5.5 0 0 0 0 1Z"/>
+                            </svg>
+                            Apple · Smartphone
+                        </span>
+                        <span>🔗 smrturl.co/a/s004ca26f15/378</span>
+                    </div>
+                </div>
+                <a href="https://smrturl.co/a/s004ca26f15/378?s1=" class="btn-gh" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 16 16" width="16" height="16">
+                        <path d="M5 2.5A1.5 1.5 0 0 1 6.5 1h6A1.5 1.5 0 0 1 14 2.5v6a1.5 1.5 0 0 1-1.5 1.5h-6A1.5 1.5 0 0 1 5 8.5v-6Z"/>
+                        <path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H5v3.5A1.5 1.5 0 0 0 6.5 10H10v.5A1.5 1.5 0 0 1 8.5 12h-5A1.5 1.5 0 0 1 2 10.5v-4Z"/>
+                    </svg>
+                    Angebot öffnen
+                </a>
+            </div>
+
+            <!-- 2. iPad Air -->
+            <div class="offer-item">
+                <div class="offer-info">
+                    <div class="offer-title">
+                        iPad Air
+                        <span class="region-tag">Germany</span>
+                    </div>
+                    <div class="offer-meta">
+                        <span>
+                            <svg width="14" height="14" viewBox="0 0 16 16" fill="#57606a">
+                                <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM5.5 7.5h5a.5.5 0 0 0 0-1h-5a.5.5 0 0 0 0 1Z"/>
+                            </svg>
+                            Apple · Tablet
+                        </span>
+                        <span>🔗 smrturl.co/a/s004ca26f15/15308</span>
+                    </div>
+                </div>
+                <a href="https://smrturl.co/a/s004ca26f15/15308?s1=" class="btn-gh" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 16 16" width="16" height="16">
+                        <path d="M5 2.5A1.5 1.5 0 0 1 6.5 1h6A1.5 1.5 0 0 1 14 2.5v6a1.5 1.5 0 0 1-1.5 1.5h-6A1.5 1.5 0 0 1 5 8.5v-6Z"/>
+                        <path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H5v3.5A1.5 1.5 0 0 0 6.5 10H10v.5A1.5 1.5 0 0 1 8.5 12h-5A1.5 1.5 0 0 1 2 10.5v-4Z"/>
+                    </svg>
+                    Angebot öffnen
+                </a>
+            </div>
+
+            <!-- 3. 1.000 EUR Guthaben von Klarna zu gewinnen! -->
+            <div class="offer-item">
+                <div class="offer-info">
+                    <div class="offer-title">
+                        🎁 1.000 € Klarna-Guthaben
+                        <span class="region-tag">Germany</span>
+                    </div>
+                    <div class="offer-meta">
+                        <span>
+                            <svg width="14" height="14" viewBox="0 0 16 16" fill="#57606a">
+                                <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM5.5 7.5h5a.5.5 0 0 0 0-1h-5a.5.5 0 0 0 0 1Z"/>
+                            </svg>
+                            Gewinnspiel · Klarna
+                        </span>
+                        <span>🔗 smrturl.co/a/s004ca26f15/18306</span>
+                    </div>
+                </div>
+                <a href="https://smrturl.co/a/s004ca26f15/18306?s1=" class="btn-gh" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 16 16" width="16" height="16">
+                        <path d="M5 2.5A1.5 1.5 0 0 1 6.5 1h6A1.5 1.5 0 0 1 14 2.5v6a1.5 1.5 0 0 1-1.5 1.5h-6A1.5 1.5 0 0 1 5 8.5v-6Z"/>
+                        <path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H5v3.5A1.5 1.5 0 0 0 6.5 10H10v.5A1.5 1.5 0 0 1 8.5 12h-5A1.5 1.5 0 0 1 2 10.5v-4Z"/>
+                    </svg>
+                    Jetzt teilnehmen
+                </a>
+            </div>
+
+            <!-- 4. Edeka 250 (Annahme: EDEKA 250 €?) -->
+            <div class="offer-item">
+                <div class="offer-info">
+                    <div class="offer-title">
+                        EDEKA 250 €
+                        <span class="region-tag">Germany</span>
+                    </div>
+                    <div class="offer-meta">
+                        <span>
+                            <svg width="14" height="14" viewBox="0 0 16 16" fill="#57606a">
+                                <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM5.5 7.5h5a.5.5 0 0 0 0-1h-5a.5.5 0 0 0 0 1Z"/>
+                            </svg>
+                            Supermarkt · Geschenkkarte
+                        </span>
+                        <span>🔗 smrturl.co/a/s004ca26f15/505</span>
+                    </div>
+                </div>
+                <a href="https://smrturl.co/a/s004ca26f15/505?s1=" class="btn-gh" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 16 16" width="16" height="16">
+                        <path d="M5 2.5A1.5 1.5 0 0 1 6.5 1h6A1.5 1.5 0 0 1 14 2.5v6a1.5 1.5 0 0 1-1.5 1.5h-6A1.5 1.5 0 0 1 5 8.5v-6Z"/>
+                        <path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H5v3.5A1.5 1.5 0 0 0 6.5 10H10v.5A1.5 1.5 0 0 1 8.5 12h-5A1.5 1.5 0 0 1 2 10.5v-4Z"/>
+                    </svg>
+                    Edeka Deal
+                </a>
+            </div>
+
+            <!-- 5. Winter Olympics [Germany] -->
+            <div class="offer-item">
+                <div class="offer-info">
+                    <div class="offer-title">
+                        ⛷️ Winter Olympics
+                        <span class="region-tag">Germany</span>
+                    </div>
+                    <div class="offer-meta">
+                        <span>
+                            <svg width="14" height="14" viewBox="0 0 16 16" fill="#57606a">
+                                <path d="M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0ZM5.5 7.5h5a.5.5 0 0 0 0-1h-5a.5.5 0 0 0 0 1Z"/>
+                            </svg>
+                            Sport · Events
+                        </span>
+                        <span>🔗 smrturl.co/a/s004ca26f15/18583</span>
+                    </div>
+                </div>
+                <a href="https://smrturl.co/a/s004ca26f15/18583?s1=" class="btn-gh" target="_blank" rel="noopener noreferrer">
+                    <svg viewBox="0 0 16 16" width="16" height="16">
+                        <path d="M5 2.5A1.5 1.5 0 0 1 6.5 1h6A1.5 1.5 0 0 1 14 2.5v6a1.5 1.5 0 0 1-1.5 1.5h-6A1.5 1.5 0 0 1 5 8.5v-6Z"/>
+                        <path d="M3 6.5A1.5 1.5 0 0 1 4.5 5H5v3.5A1.5 1.5 0 0 0 6.5 10H10v.5A1.5 1.5 0 0 1 8.5 12h-5A1.5 1.5 0 0 1 2 10.5v-4Z"/>
+                    </svg>
+                    Zum Angebot
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-note">
+            <span class="github-icon-small">
+                <svg viewBox="0 0 16 16" width="18" height="18" fill="#57606a">
+                    <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z"/>
+                </svg>
+                <span>GitHub style button · direktlinks</span>
+            </span>
+            <span style="display: flex; gap: 8px;">🇩🇪 5 Angebote</span>
+        </div>
+    </div>
+
+    <!-- kleine Notiz: alle s1-Parameter sind angehängt, wie in den Beispiel-URLs -->
+</body>
+</html>
